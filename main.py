@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from google.generativeai import GenerativeModel, configure
 from pathlib import Path
 import google.generativeai as genai
@@ -10,6 +10,7 @@ from gtts import gTTS
 import os
 from langdetect import detect
 from fastapi.responses import FileResponse
+import json
 
 load_dotenv()
 
@@ -21,9 +22,12 @@ def read_root():
     return {"message": "Welcome to FastAPI!"}
 
 @app.post("/govt-scheme")
-async def govt_scheme(file: UploadFile = File(...)):
+async def govt_scheme(file: UploadFile = File(...),user_profile_json: str = Form(...)):
     print("came")
-
+    try:
+        user_profile = json.loads(user_profile_json)
+    except json.JSONDecodeError as e:
+        return {"error": "Invalid user profile JSON", "details": str(e)}
     file_path = f"temp_{file.filename}"
     
     with open(file_path, "wb") as f:
@@ -34,7 +38,7 @@ async def govt_scheme(file: UploadFile = File(...)):
     text = stt(file_path)
     print(f"Transcript: {text}")
     
-    reply = llmcall(text)
+    reply = llmcall(text,user_profile)
     print(f"LLM Response: {reply}")
     
     tts = text_to_speech(reply, language=detect_language(reply), output_file="response.mp3")
@@ -47,7 +51,7 @@ def stt(file):
     response = model.generate_content([prompt, myfile])
     return response.text
 
-def llmcall(question):
+def llmcall(question,user_profile):
     """Create and return a chat instance with context."""
     context = ""
     # base_path = Path("state")
@@ -70,8 +74,9 @@ def llmcall(question):
     chat = model.start_chat(history=[])
     
     system_prompt = f"""You are a helpful assistant that provides information about various government schemes, market prices and digital literacy from different states in India. 
-    Use the following context and your knowledge to answer questions about these schemes. Provide a very clean output without any special characters
-    
+    Use the following context and your knowledge to answer questions about these schemes. Provide a very clean output without any special characters. Also give relevant information according to the user profile
+    User Profile:
+    {user_profile}
     Context:
     {context}
     """
