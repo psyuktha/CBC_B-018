@@ -50,16 +50,22 @@ def stt(file):
 def llmcall(question):
     """Create and return a chat instance with context."""
     context = ""
-    base_path = Path("state_schemes")
+    # base_path = Path("state")
     
-    states = ["andhra-pradesh", "karnataka", "kerala", "tamilnadu", "telangana", "central"]
+    # states = ["andhra-pradesh", "karnataka", "kerala", "tamilnadu", "telangana", "central"]
     
-    for state in states:
-        combined_file = base_path / state / f"{state}_combined.txt"
-        if combined_file.exists():
-            with open(combined_file, 'r', encoding='utf-8') as f:
-                context += f"\n\n=== {state.upper()} SCHEMES ===\n"
-                context += f.read()
+    # for state in states:
+    #     combined_file = base_path / f"{state}_combined.txt"
+    #     if combined_file.exists():
+    #         with open(combined_file, 'r', encoding='utf-8') as f:
+    #             context += f"\n\n=== {state.upper()} SCHEMES ===\n"
+    #             context += f.read()
+    # print(context)
+    # output_file = Path("state") / "all_states_combined.txt"
+    # with open(output_file, 'w', encoding='utf-8') as out_f:
+    #     out_f.write(context)
+    with open("context.txt",'r',encoding='utf-8') as f:
+        context+=f.read()
     
     chat = model.start_chat(history=[])
     

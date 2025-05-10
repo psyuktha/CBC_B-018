@@ -1,8 +1,10 @@
 from google.generativeai import GenerativeModel, configure
 import google.generativeai as genai
-
+from dotenv import load_dotenv
+import os
+load_dotenv
 # Configure the API key
-genai.configure(api_key="AIzaSyAZ_w7pLdfI0gvkGI8ytBttm9jN-GNmYrg")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Upload the file
 myfile = genai.upload_file(path="output.mp3")
