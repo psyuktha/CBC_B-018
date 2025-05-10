@@ -2,6 +2,8 @@ import os
 import google.generativeai as genai
 from pathlib import Path
 from dotenv import load_dotenv
+from gtts_demo import detect_language, text_to_speech
+
 
 # Load environment variables
 load_dotenv()
@@ -42,7 +44,7 @@ def create_chatbot():
     chat = model.start_chat(history=[])
     
     system_prompt = f"""You are a helpful assistant that provides information about various government schemes from different states in India. 
-    Use the following context to answer questions about these schemes. If you don't know something, say so.
+    Use the following context and your knowledge to answer questions about these schemes. 
     
     Context:
     {context}
@@ -70,9 +72,9 @@ def get_scheme_info(question: str) -> str:
 
 # Example usage:
 if __name__ == "__main__":
-    question = "तेलंगाना 2BHK हाउसिंग स्कीम का मुख्य उद्देश्य गरीब लोगों को आश्रय प्रदान करना है। इस योजना के तहत, सरकार पात्र लाभार्थियों को बिना किसी लागत के आवास प्रदान करती है।"
+    question = "प्रधानमंत्री किसान सम्मान निधि योजना के अंतर्गत किसानों को प्रति वर्ष कितनी आर्थिक सहायता दी जाती है और यह कितनी किश्तों में प्रदान की जाती है?"
     response = get_scheme_info(question)
     print(response)
-
+    text_to_speech(response)
 
 
