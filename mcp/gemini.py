@@ -2,7 +2,7 @@ import os
 import google.generativeai as genai
 from pathlib import Path
 from dotenv import load_dotenv
-from gtts_demo import detect_language, text_to_speech
+from mcp.gtts_demo import detect_language, text_to_speech
 
 
 # Load environment variables

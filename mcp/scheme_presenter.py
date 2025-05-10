@@ -1,5 +1,5 @@
 from typing import Optional
-from scheme_controller import SchemeController
+from mcp.scheme_controller import SchemeController
 
 class SchemePresenter:
     def __init__(self, controller: SchemeController):

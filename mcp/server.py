@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from gemini import initialize_model, load_context_files, get_scheme_info
+from mcp.gemini import initialize_model, load_context_files, get_scheme_info
 import logging
 
 # Configure logging

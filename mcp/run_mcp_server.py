@@ -1,7 +1,7 @@
 import os
 import asyncio
 from dotenv import load_dotenv
-from mcp_ import create_scheme_agent, get_scheme_info
+from mcp.mcp_ import create_scheme_agent, get_scheme_info
 
 async def run_server():
     try:

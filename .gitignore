@@ -1,3 +1,21 @@
-.env
+# Python cache and virtual environments
 __pycache__/
-.venv
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+# macOS files
+.DS_Store
+
+# VSCode settings (optional)
+.vscode/
+
+# Logs
+*.log

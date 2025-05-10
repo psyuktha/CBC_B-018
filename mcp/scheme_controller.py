@@ -1,5 +1,5 @@
 from typing import Optional
-from scheme_model import SchemeModel
+from mcp.scheme_model import SchemeModel
 
 class SchemeController:
     def __init__(self, model: SchemeModel):
