@@ -11,6 +11,7 @@ import os
 from langdetect import detect
 from fastapi.responses import FileResponse
 import json
+import pandas as pd
 
 load_dotenv()
 
@@ -23,7 +24,7 @@ chat = model.start_chat(history=[])
 def read_root():
     return {"message": "Welcome to FastAPI!"}
 
-@app.post("/govt-scheme")
+@app.post("/chat")
 async def govt_scheme(file: UploadFile = File(...),user_profile_json: str = Form(...)):
     print("came")
     try:
@@ -73,9 +74,13 @@ def llmcall(question,user_profile):
     with open("context.txt",'r',encoding='utf-8') as f:
         context+=f.read()
     
+    df=pd.read_csv("market_price.csv")
+    data_list = df.to_dict('records')
+    market = str(data_list)
+    
     
     system_prompt = f"""You are a helpful assistant that provides information about various government schemes, market prices and digital literacy from different states in India. 
-    Use the following context and your knowledge to answer questions about these schemes. Provide a very clean output without any special characters. Also give relevant information according to the user profile
+    Use the following context and your knowledge to answer questions about these schemes. Provide a very clean output without any special characters. Also give relevant information according to the user profile. Refer to marker prices of different commodities in different regions in this file {market}
     User Profile:
     {user_profile}
     Context:
