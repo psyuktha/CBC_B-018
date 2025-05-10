@@ -73,8 +73,9 @@ def get_scheme_info(question: str) -> str:
 # Example usage:
 if __name__ == "__main__":
     question = "प्रधानमंत्री किसान सम्मान निधि योजना के अंतर्गत किसानों को प्रति वर्ष कितनी आर्थिक सहायता दी जाती है और यह कितनी किश्तों में प्रदान की जाती है?"
-    response = get_scheme_info(question)
-    print(response)
-    text_to_speech(response)
+    text_to_speech(question)
+    # response = get_scheme_info(question)
+    # print(response)
+    # text_to_speech(response)
 
 

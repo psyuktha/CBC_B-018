@@ -63,8 +63,8 @@ def llmcall(question):
     
     chat = model.start_chat(history=[])
     
-    system_prompt = f"""You are a helpful assistant that provides information about various government schemes from different states in India. 
-    Use the following context and your knowledge to answer questions about these schemes. 
+    system_prompt = f"""You are a helpful assistant that provides information about various government schemes, market prices and digital literacy from different states in India. 
+    Use the following context and your knowledge to answer questions about these schemes. Provide a very clean output without any special characters
     
     Context:
     {context}
