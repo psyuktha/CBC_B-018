@@ -9,7 +9,7 @@ from gtts_demo import detect_language, text_to_speech
 load_dotenv()
 
 # Get API key from environment variable
-GOOGLE_API_KEY = "AIzaSyAZ_w7pLdfI0gvkGI8ytBttm9jN-GNmYrg"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
     raise ValueError("Please set GOOGLE_API_KEY environment variable")
 
